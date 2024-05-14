@@ -1,3 +1,3 @@
-import {web} from "../src/application/web";
+import  app from "../src/application/web";
 
-export default web;
+export default app;

@@ -3,11 +3,13 @@ import { publicRouter } from "../route/public-api"
 import { errorMiddleware } from "../middleware/error-middleware";
 import { apiRouter } from "../route/api";
 
-require('dotenv').config();
+require('dotenv').config({path: "../.env"});
 
-export const web = express();
+const app = express();
 
-web.use(express.json());
-web.use(publicRouter);
-web.use(apiRouter);
-web.use(errorMiddleware);
+app.use(express.json());
+app.use(publicRouter);
+app.use(apiRouter);
+app.use(errorMiddleware);
+
+export default app
