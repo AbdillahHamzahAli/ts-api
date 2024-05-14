@@ -1,0 +1,16 @@
+# MY API MUST DONE
+
+- project ini harus selesai dan digunakan apapun masalah yang akan datang harus diatasi
+
+## FEATURE
+
+- AUTH 
+- CRUD POST
+- CRUD CATEGORIE POST
+ 
+## TECHNOLOGY
+
+- DATABASE : PRISMA CONNECT TO MONGODB | SUPABASE BUCKET
+- BACKEND : EXPRESS JS WITH TYPESCRIPT
+- FRONTEND : REACT JS
+- DEPLOY TO : VERCEL

@@ -1,0 +1,57 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Post {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title    String   
+  slug     String    @unique
+  thumbnail String?
+  description String?
+  content  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  authorId String    @db.ObjectId
+  user   User        @relation(fields: [authorId], references: [id])
+
+  tagIDs String[]   @db.ObjectId
+  tags  Tag[]       @relation(fields: [tagIDs], references: [id])
+
+  @@map("posts")
+}
+
+model User {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String?  
+  username String  @unique
+  password String
+  name    String
+  token   String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  posts   Post[]
+  tags Tag[]
+  @@map("users")
+}
+
+model Tag {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  title   String @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  authorId String    @db.ObjectId
+  user   User        @relation(fields: [authorId], references: [id])
+  
+  postIDs String[] @db.ObjectId
+  posts   Post[]   @relation(fields: [postIDs], references: [id])
+
+  @@map("tags")
+}
