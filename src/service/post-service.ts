@@ -10,12 +10,12 @@ import slugify from "slugify";
 
 export class PostService {
     static async create(user: User, request : CreatePostRequest) : Promise<PostResponse>{
+        const createRequest = Validation.validate(PostValidation.CREATE,request);
         
         const slug: string = slugify(request.title,{
             lower:true
         });
         
-        const createRequest = Validation.validate(PostValidation.CREATE,request);
         const slugValidated = Validation.validate(PostValidation.SLUG, {slug: slug})
 
         const checkPostWithSameSlug = await prisma.post.count({
